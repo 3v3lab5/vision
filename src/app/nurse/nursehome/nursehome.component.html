@@ -1,0 +1,109 @@
+<div fxLayout="row" class="main">
+        <div fxFlex="75" fxFlex.xs="100" fxLayout="column"  style="background-color: rgb(245,245,245);border-right:  #616161;padding:20px;">
+            <div fxFlex="100" style="overflow-y: scroll;">
+                <mat-grid-list [cols]="cols" (window:resize)="onResize($event)" rowHeight="260px" gutterSize="20px">
+                     <mat-grid-tile
+                     *ngFor="let dripo of dripos"
+                     [colspan]="1"
+                     [rowspan]="1">
+                         <mat-card fxLayout="column" [ngClass]="[(dripo.monitor==true)?'online':'offline' ,(dripo.status=='alerted')?'alerted_card':'ongoing_card']" flexLayoutAlign="center center" style="height: 100%;width: 100%;box-shadow: none;padding: 0px;border: 1px solid rgb(230,230,230)">
+                             <div fxFlex="20" *ngIf="dripo.monitor==true" style="text-align: center;padding-top:0.5em;font-size: 1.5em;" [ngClass]="(dripo.status=='alerted')?'alerted':'ongoing'">
+                                 <b>{{dripo.bedName}}</b>
+                             </div>
+                             <div fxFlex="20" *ngIf="dripo.monitor==false" style="text-align: center;padding:1em;font-size: 1.5em;color:#757575;">
+                                 <b>{{dripo.altName}}</b>
+                             </div>
+                             <mat-progress-bar *ngIf="dripo.status != 'alerted'"  mode="determinate" value=0></mat-progress-bar>
+                             <mat-progress-bar color="warn" *ngIf="dripo.status == 'alerted'"   mode="determinate" value=0></mat-progress-bar>
+                             <div fxFlex="80"  fxLayout="column" flexLayoutAlign="center center">
+                                 <div fxFlex="10" fxLayout="row">
+                                     <div fxFlex="80"></div>
+                                     <div fxFlex="20">
+                                         <mat-icon  *ngIf="dripo.deviceCharge < 20" class="rotate-90" svgIcon="battery_20" style="color: red"></mat-icon>
+                                         <mat-icon  *ngIf="dripo.deviceCharge >= 20 && dripo.deviceCharge<30" class="rotate-90" svgIcon="battery_20"></mat-icon>
+                                        <mat-icon  *ngIf="dripo.deviceCharge >= 30 && dripo.deviceCharge<40" class="rotate-90" svgIcon="battery_30"></mat-icon>
+                                        <mat-icon  *ngIf="dripo.deviceCharge >= 40 && dripo.deviceCharge<60" class="rotate-90" svgIcon="battery_50"></mat-icon>
+                                        <mat-icon  *ngIf="dripo.deviceCharge >= 60 && dripo.deviceCharge<80" class="rotate-90" svgIcon="battery_60"></mat-icon>
+                                        <mat-icon  *ngIf="dripo.deviceCharge >= 80 && dripo.deviceCharge<90" class="rotate-90" svgIcon="battery_80"></mat-icon>
+                                         <mat-icon  *ngIf="dripo.deviceCharge >= 90" class="rotate-90" svgIcon="battery_full"></mat-icon>
+                                     </div>
+                                 </div>
+                                 <div fxFlex="90"  fxLayout="column" flexLayoutAlign="center center">
+                                    <div fxFlex="30" *ngIf="dripo.monitor==true && dripo.rate!=0"  style="text-align: center;font-size: 3em;font-weight: 500;color:#757575;">
+                                        {{dripo.rate}} 
+                                    </div>
+                                    <div fxFlex="30" *ngIf="dripo.monitor==true && dripo.rate==0"  style="text-align: center;font-size: 2em;font-weight: 500;padding-top:0.6em;color:#757575;">
+                                        No Flow
+                                    </div>
+                                    <div fxFlex="30" *ngIf="dripo.monitor==false"  style="text-align: center;font-size: 3em;font-weight: 500;color:#757575;">
+                                        _ _ _
+                                    </div>
+                                    <div fxFlex="15" *ngIf="dripo.rate!=0" style="text-align: center;font-size: 1.3em;color:#757575;">
+                                        <span>ml/hr</span>
+                                    </div>
+                                    <div fxFlex="15" *ngIf="dripo.rate==0" style="text-align: center;font-size: 1.3em;color:#757575;">
+                                    </div>
+                                    <div fxFlex="30" fxLayout="column" style="text-align: center;font-size: 1em;color:#757575;">
+                                        <div fxFlex="40" style="font-weight: 600;" *ngIf="dripo.monitor==true">{{dripo.infusedVolume}}<span style="font-weight: 300;"> ml infused</span></div>
+                                        <div fxFlex="40" *ngIf="dripo.monitor==false">_ _ _ ml</div>
+                                        <div fxFlex="60" style="margin-left: 2em;margin-right: 2em;">
+                                            <mat-progress-bar *ngIf="dripo.status !='alerted' && dripo.monitor==true"  style="height: 1.5em;"   mode="determinate" value={{dripo.percentage}}>
+                                            </mat-progress-bar>
+                                            <mat-progress-bar color="warn" *ngIf="dripo.status=='alerted' && dripo.monitor==true " style="height: 1.5em;"   mode="determinate" value={{dripo.percentage}}>
+                                            </mat-progress-bar>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)>9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}}:{{dripo.timeRemaining%60}}
+                                    </div>
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)<=9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}}:0{{dripo.timeRemaining%60}} 
+                                    </div>
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)<=0 && dripo.status !='alerted'"  style="padding-top: 0.3em;text-align: center;color:#757575;font-size: 1.5em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">00:00
+                                    </div>
+                                    <div fxFlex=25 *ngIf="dripo.monitor == true && dripo.status=='alerted'" style="text-align: center;">
+                                        <button style="width: 90%;font-size: 1em;font-weight: 400;" mat-stroked-button color="warn" (click)=acknowledge(dripo._id)>Acknowledge</button>
+                                    </div>
+                                    <div fxFlex="25" *ngIf="dripo.monitor==false"  style="text-align: center;color:#757575;font-size: 1.5em;">_ _ _
+                                    </div>
+                                </div>
+                             </div>
+                        </mat-card>
+                     </mat-grid-tile>
+                </mat-grid-list>	
+            </div>
+        </div>
+    
+    
+        <div fxFlex="25" fxLayout="column" style="border-left: solid thin #E0E0E0;background-color: rgb(235,235,235);" [fxShow.gt-sm]="true"  fxHide [fxHide.xs]="true">
+            <div fxFlex="15" fxLayout="column" flexLayoutAlign="center center" style="border-bottom: solid thin #E0E0E0;">
+                <div fxFlex="50" style="color:#757575;text-align: center; padding: 1em;font-size:2em;font-weight: 300;">Infusion History</div>
+            </div>
+            <div fxFlex="85" style="overflow-y: scroll;">
+                <mat-accordion *ngFor="let history of histories">
+                  <mat-expansion-panel style="margin: 0.3em;">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title style="font-weight: 500;color: #33691e;">
+                          <b>{{history.bedName}}</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                          {{history.date}} &nbsp;&nbsp;&nbsp;&nbsp;{{history.startingTime}}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div fxLayout="column">
+                        <div fxFlex="50" fxLayout="row">
+                            <div fxFlex="50">Total Volume</div>
+                            <div fxFlex="50">{{history.totalVolume}}</div>
+                        </div>
+                        <div fxFlex="50" fxLayout="row">
+                            <div fxFlex="50">Infused Volume</div>
+                            <div fxFlex="50">{{history.infusedVolume}}</div>
+                        </div>
+                        <div fxFlex="50" fxLayout="row">
+                            <div fxFlex="50">Ending Time</div>
+                            <div fxFlex="50">{{history.endingTime}}</div>
+                        </div>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Remove Bed</h2>
+
+<mat-dialog-content>
+
+	Are you sure you want to remove {{deleteBedData.bedName}} ?
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div fxLayout="row" style="width:100%;">
+    <button fxFlex=40 class="mat-raised-button mat-primary" color="primary" style="margin-right: 20px;" [mat-dialog-close]="true">Close</button>
+    <div fxFlex=20></div>
+    <button fxFlex=40  class="mat-raised-button mat-accent"(click)="removeBed()">Remove</button>
+    </div>
+</mat-dialog-actions>

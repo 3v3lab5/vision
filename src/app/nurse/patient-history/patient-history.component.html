@@ -1,0 +1,28 @@
+<div style="width: 100%;height: 100%;" class="scrollable">
+        <mat-accordion *ngFor="let history of histories">
+          <mat-expansion-panel style="margin: 0.3em;">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  {{history.bedName}}
+              </mat-panel-title>
+              <mat-panel-description>
+                  {{history.date}} {{history.startingTime}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="column">
+                <div fxFlex="50" fxLayout="row">
+                    <div fxFlex="50">Total Volume</div>
+                    <div fxFlex="50">{{history.totalVolume}}</div>
+                </div>
+                <div fxFlex="50" fxLayout="row">
+                    <div fxFlex="50">Infused Volume</div>
+                    <div fxFlex="50">{{history.infusedVolume}}</div>
+                </div>
+                <div fxFlex="50" fxLayout="row">
+                    <div fxFlex="50">Ending Time</div>
+                    <div fxFlex="50">{{history.endingTime}}</div>
+                </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+</div>
