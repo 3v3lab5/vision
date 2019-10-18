@@ -53,9 +53,9 @@
                                             </mat-progress-bar>
                                         </div>
                                     </div>
-                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)>9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}}:{{dripo.timeRemaining%60}}
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)>9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}} <b style="font-size:12px;">Hr</b> {{dripo.timeRemaining%60}} <b style="font-size:12px;">Min</b>
                                     </div>
-                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)<=9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}}:0{{dripo.timeRemaining%60}} 
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)<=9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}} <b style="font-size:12px;">Hr</b> 0{{dripo.timeRemaining%60}} <b style="font-size:12px;">Min</b>
                                     </div>
                                     <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)<=0 && dripo.status !='alerted'"  style="padding-top: 0.3em;text-align: center;color:#757575;font-size: 1.5em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">00:00
                                     </div>
