@@ -14,11 +14,20 @@ export class AuthService {
   public hospitalName;
   public stationName;
   public permission;
+  private decodedToken;
+
   private registerUrl = "http://74.207.227.41:4000/api/register";
 	private loginUrl = "http://74.207.227.41:4000/api/login";
   private activateAccountUrl  = "http://74.207.227.41:4000/api/activate";
   private forgotPasswordUrl = "http://74.207.227.41:4000/api/forgotpassword";
   private resetPasswordUrl = "http://74.207.227.41:4000/api/resetpassword";
+  private resendActivationLinkUrl="http://74.207.227.41:4000/api/resend"
+
+  // private registerUrl = "http://localhost:4000/api/register";
+  // private resendActivationLinkUrl="http://localhost:4000/api/resend"
+  // private activateAccountUrl  = "http://localhost:4000/api/activate";
+  // private loginUrl = "http://localhost:4000/api/login";
+  // private forgotPasswordUrl = "http://localhost:4000/api/forgotpassword";
   // private resetPasswordUrl = "http://localhost:4000/api/resetpassword";
 
   constructor(private http:HttpClient,private router:Router) { }
@@ -52,10 +61,21 @@ export class AuthService {
     return this.http.post<any>(this.resetPasswordUrl,resetData)
   }
 
+  resendActivationLink(user){
+    return this.http.put<any>(this.resendActivationLinkUrl,user)
+  }
+
+
   public loggedIn(){
     const token = localStorage.getItem('token');
-    const decodedToken = this.jwtHelper.decodeToken(token);
-    if(decodedToken){
+    try { 
+      this.decodedToken = this.jwtHelper.decodeToken(token);
+
+    }
+    catch(e){
+      this.logoutUser();
+    }
+    if(this.decodedToken){
       return true;
     }
     else{

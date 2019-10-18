@@ -31,7 +31,8 @@ export class ResetpasswordComponent implements OnInit {
   	        	if(res.success){
   	        		console.log(res.data.userName);
   	        		this.userName = res.data.userName;
-  	        		this.snackbar.open(res.message, 'close')
+					this.snackbar.open(res.message, 'close')
+
   	        	}
   	        	else{
   	        		this.snackbar.open(res.message, 'close')
@@ -51,7 +52,8 @@ export class ResetpasswordComponent implements OnInit {
   	  	.subscribe(
   	  		res => {
   	              if(res.success){
-  	                this.snackbar.open(res.message, 'close')
+					  this.snackbar.open(res.message, 'close')
+					  this.router.navigate(['/guest/login'])
   	              }
   	          },
   	        err => {

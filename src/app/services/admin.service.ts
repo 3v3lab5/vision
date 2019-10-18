@@ -14,7 +14,7 @@ export class AdminService {
   private manageDripoUrl = 'http://74.207.227.41:4000/api/admin/dripo'
 
     // private manageUserUrl = 'http://localhost:4000/api/admin/user'
-    //private manageStationUrl = 'http://localhost:4000/api/admin/station'
+    // private manageStationUrl = 'http://localhost:4000/api/admin/station'
     // private manageBedUrl = 'http://localhost:4000/api/admin/bed'
     // private manageIvsetUrl = 'http://localhost:4000/api/admin/ivset'
     // private manageDripoUrl = 'http://localhost:4000/api/admin/dripo'

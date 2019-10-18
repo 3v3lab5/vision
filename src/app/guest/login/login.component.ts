@@ -2,6 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {FormControl,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private auth: AuthService,private router:Router) { }
+  constructor(private fb: FormBuilder,private auth: AuthService,private router:Router,public snackbar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -36,6 +37,19 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token',res.token)
             this.router.navigate(['/nurse/selectstation'])
           }
+          else if(res.success==true && res.expired == true){
+            let snackBarRef = this.snackbar.open(res.message, 'Resend Link');
+            snackBarRef.afterDismissed().subscribe(() => {
+              this.auth.resendActivationLink(this.loginData)
+              .subscribe(
+                res => {
+                  if(res.success==true){
+                    this.snackbar.open(res.message, 'close');
+                  }
+                })
+            });
+
+          }
           else{
             this.router.navigate(['/login'])
           }
@@ -45,5 +59,7 @@ export class LoginComponent implements OnInit {
 
     	)
   }
+
+  
 
 }

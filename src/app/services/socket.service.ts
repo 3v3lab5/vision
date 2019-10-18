@@ -11,6 +11,7 @@ export class SocketService {
   constructor() {
     this.socket = io('http://74.207.227.41:4000');
     // this.socket = io('http://localhost:4000');
+    //this.socket = io('https://localhost:4000',{secure:true , rejectUnauthorized: false });
 
   }
 
