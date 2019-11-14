@@ -1,7 +1,11 @@
-<div fxLayout="row" class="main">
+<div *ngIf="this.loader==false" fxLayout="row" fxLayoutAlign="center center" style="height: 100%;width: 100%">
+    <mat-spinner color="accent"></mat-spinner>
+</div>
+
+<div fxLayout="row" class="main" *ngIf="this.loader==true">
         <div fxFlex="75" fxFlex.xs="100" fxLayout="column"  style="background-color: rgb(245,245,245);border-right:  #616161;padding:20px;">
             <div fxFlex="100" style="overflow-y: scroll;">
-                <mat-grid-list [cols]="cols" (window:resize)="onResize($event)" rowHeight="260px" gutterSize="20px">
+                <mat-grid-list [cols]="cols" (window:resize)="onResize($event)" [rowHeight]="rowHeight" [gutterSize]="gutterSize">
                      <mat-grid-tile
                      *ngFor="let dripo of dripos"
                      [colspan]="1"
@@ -73,11 +77,17 @@
         </div>
     
     
-        <div fxFlex="25" fxLayout="column" style="border-left: solid thin #E0E0E0;background-color: rgb(235,235,235);" [fxShow.gt-sm]="true"  fxHide [fxHide.xs]="true">
-            <div fxFlex="15" fxLayout="column" flexLayoutAlign="center center" style="border-bottom: solid thin #E0E0E0;">
-                <div fxFlex="50" style="color:#757575;text-align: center; padding: 1em;font-size:2em;font-weight: 300;">Infusion History</div>
+        <div fxFlex="25" fxLayout="column" style="border-left: solid thin #E0E0E0;background-color: rgb(235,235,235);" [fxShow.gt-xs]="true"  fxHide [fxHide.xs]="true">
+            <div fxFlex="40" fxLayout="column" flexLayoutAlign="center center" >
+                <div fxFlex="50" style="color:#757575;text-align: center; padding: 0.5em;font-size:2em;font-weight: 300;">Infusion History</div>
+                <mat-form-field fxFlex="25" appearance="outline" style="margin:1em">
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="date" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <button fxFlex="25" style="margin:4em;margin-top: 0;" mat-stroked-button color="accent" (click)="searchInfusionHistory()">Search</button>
             </div>
-            <div fxFlex="85" style="overflow-y: scroll;">
+            <div fxFlex="70" style="overflow-y: scroll;">
                 <mat-accordion *ngFor="let history of histories">
                   <mat-expansion-panel style="margin: 0.3em;">
                     <mat-expansion-panel-header>
@@ -101,6 +111,7 @@
                             <div fxFlex="50">Ending Time</div>
                             <div fxFlex="50">{{history.endingTime}}</div>
                         </div>
+                        <button mat-button color="accent" style="width: 100;" [routerLink]="['/nurse/infusiondetails/',history._id]">More details</button>
                     </div>
                   </mat-expansion-panel>
                 </mat-accordion>

@@ -19,6 +19,7 @@ import { DeleteBedDialogComponent } from './dialogs/delete-bed-dialog/delete-bed
 import { EditDripoDialogComponent } from './dialogs/edit-dripo-dialog/edit-dripo-dialog.component';
 import { DeleteDripoDialogComponent } from './dialogs/delete-dripo-dialog/delete-dripo-dialog.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,7 @@ import { DeleteDripoDialogComponent } from './dialogs/delete-dripo-dialog/delete
     MatOptionModule,
     MatSelectModule,
     MatTabsModule
-
+    
 
 
     

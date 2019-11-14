@@ -20,6 +20,9 @@ export class NurseService {
 	private getPhistoryUrl = 'http://74.207.227.41:4000/api/nurse/patienthistory'
 	private getDriposUrl = 'http://74.207.227.41:4000/api/nurse/dripo'
 	private blockAcknowledgeUrl = 'http://74.207.227.41:4000/api/nurse/blockack'
+	private getInfusionDetailsUrl =  'http://74.207.227.41:4000/api/nurse/infusiondetails'
+	private searchInfusionHistoryUrl = 'http://74.207.227.41:4000/api/nurse/infusionhistory'
+
 
 
 	// private getStationsUrl = 'http://localhost:4000/api/nurse/station'
@@ -35,6 +38,8 @@ export class NurseService {
 	// private getPhistoryUrl = 'http://localhost:4000/api/nurse/patienthistory'
 	// private getDriposUrl = 'http://localhost:4000/api/nurse/dripo'
 	// private blockAcknowledgeUrl = 'http://localhost:4000/api/nurse/blockack'
+	//private getInfusionDetailsUrl =  'http://localhost:4000/api/nurse/infusiondetails'
+	//private searchInfusionHistoryUrl = 'http://localhost:4000/api/nurse/infusionhistory'
 
 	constructor(private http:HttpClient,private router:Router) { }
 	readStations(){
@@ -97,6 +102,18 @@ export class NurseService {
 	}
 	blockAck(blockAckData){
 		return this.http.put<any>(this.blockAcknowledgeUrl,blockAckData)
+	}
+
+	readInfusionDetails(id){
+		let params = new HttpParams();
+		params = params.append("_id", id);
+		return this.http.get<any>(this.getInfusionDetailsUrl,{params: params})
+	}
+
+	searchInfusionHistory(date){
+		let params = new HttpParams();
+		params = params.append("date", date);
+		return this.http.get<any>(this.searchInfusionHistoryUrl,{params: params})
 	}
 
 }

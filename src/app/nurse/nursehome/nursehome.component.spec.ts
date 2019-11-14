@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NursehomeComponent } from './nursehome.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatSnackBarModule, MatGridListModule, MatProgressBarModule, MatExpansionModule } from '@angular/material';
+import { RoundPipe } from 'src/app/pipes/round.pipe';
 
 describe('NursehomeComponent', () => {
   let component: NursehomeComponent;
@@ -8,7 +15,23 @@ describe('NursehomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NursehomeComponent ]
+      imports: [MatCardModule,
+        MatGridListModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        RouterTestingModule,
+        MatSnackBarModule,
+        MatInputModule,
+        FormsModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        FlexLayoutModule,
+        HttpClientModule,
+        BrowserAnimationsModule
+      ],
+      declarations: [ NursehomeComponent,RoundPipe ]
     })
     .compileComponents();
   }));

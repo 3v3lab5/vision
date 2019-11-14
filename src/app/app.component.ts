@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'Vision';
-  constructor(public authService:AuthService,private router:Router,private matIconRegistry: MatIconRegistry,private domSanitizer: DomSanitizer,){
+  constructor(public authService:AuthService,private router:Router,private matIconRegistry: MatIconRegistry,private domSanitizer: DomSanitizer,private meta:Meta){
       matIconRegistry.addSvgIcon('battery_90', domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/battery_90.svg'));
       matIconRegistry.addSvgIcon('battery_20', domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/battery_20.svg'));
       matIconRegistry.addSvgIcon('battery_30', domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/battery_30.svg'));
@@ -20,7 +22,13 @@ export class AppComponent {
       matIconRegistry.addSvgIcon('battery_80', domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/battery_80.svg'));
       matIconRegistry.addSvgIcon('battery_full', domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/battery_full.svg'));
       matIconRegistry.addSvgIcon('battery_alert', domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/battery_alert.svg'));
-
+      
+      this.meta.addTags([
+        {name: 'Evelabs', content: 'Liberate Thoughts'},
+        {name: 'Evelabs Technologies Pvt Ltd', content: 'Liberate Thoughts'},
+        {name: 'dripo.care', content: 'Infusion monitor management interface to view the live activity of dripo'},
+        {name: 'dripo', content: 'connected infusion monitor'}
+      ]);
 
   }
 

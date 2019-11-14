@@ -7,6 +7,11 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 16 1 auto;
   }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline{
+    background: #ffffffff;
+    border-radius:5px 0 0 5px
+  }
   
   .toolbar-active{
       color:black;

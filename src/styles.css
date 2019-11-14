@@ -2,3 +2,8 @@
 
 html, body { height: 95%; }
 body { margin: 0; font-family: Poppins, "Helvetica Neue", sans-serif; }
+
+.mat-form-field-appearance-outline .mat-form-field-outline{
+    background: #ffffffff;
+    border-radius:5px 0 0 5px
+  }

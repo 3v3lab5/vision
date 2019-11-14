@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { MatCardModule,MatIconModule,MatFormFieldModule,MatInputModule, MatButtonModule, MatSnackBarModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatCardModule,MatIconModule,MatFormFieldModule,MatInputModule, MatButtonModule, MatSnackBarModule, MatProgressSpinnerModule, MatCard } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
