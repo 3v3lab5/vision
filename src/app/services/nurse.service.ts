@@ -35,11 +35,11 @@ export class NurseService {
 	// private getUpcomingTaskUrl = 'http://localhost:4000/api/nurse/upcomingtask'
 	// private getDelayedTaskUrl = 'http://localhost:4000/api/nurse/delayedtask'
 	// private getActiveTaskUrl = 'http://localhost:4000/api/nurse/activetask'
-	// private getPhistoryUrl = 'http://localhost:4000/api/nurse/patienthistory'
+	//private getPhistoryUrl = 'http://localhost:4000/api/nurse/patienthistory'
 	// private getDriposUrl = 'http://localhost:4000/api/nurse/dripo'
 	// private blockAcknowledgeUrl = 'http://localhost:4000/api/nurse/blockack'
 	//private getInfusionDetailsUrl =  'http://localhost:4000/api/nurse/infusiondetails'
-	//private searchInfusionHistoryUrl = 'http://localhost:4000/api/nurse/infusionhistory'
+	// private searchInfusionHistoryUrl = 'http://localhost:4000/api/nurse/infusionhistory'
 
 	constructor(private http:HttpClient,private router:Router) { }
 	readStations(){
