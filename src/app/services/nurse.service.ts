@@ -7,21 +7,42 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class NurseService {
-  private getStationsUrl = 'http://74.207.227.41:4000/api/nurse/station'
-	private setStationUrl = 'http://74.207.227.41:4000/api/nurse/setstation'
-	private getBedsUrl = 'http://74.207.227.41:4000/api/nurse/bed'
-	private getDoctorsUrl = 'http://74.207.227.41:4000/api/nurse/doctor'
-	private managePatientUrl = 'http://74.207.227.41:4000/api/nurse/patient'
-	private getOccupiedBedsUrl = 'http://74.207.227.41:4000/api/nurse/occupiedbed'
-	private manageTaskUrl = 'http://74.207.227.41:4000/api/nurse/task'
-	private getUpcomingTaskUrl = 'http://74.207.227.41:4000/api/nurse/upcomingtask'
-	private getDelayedTaskUrl = 'http://74.207.227.41:4000/api/nurse/delayedtask'
-	private getActiveTaskUrl = 'http://74.207.227.41:4000/api/nurse/activetask'
-	private getPhistoryUrl = 'http://74.207.227.41:4000/api/nurse/patienthistory'
-	private getDriposUrl = 'http://74.207.227.41:4000/api/nurse/dripo'
-	private blockAcknowledgeUrl = 'http://74.207.227.41:4000/api/nurse/blockack'
-	private getInfusionDetailsUrl =  'http://74.207.227.41:4000/api/nurse/infusiondetails'
-	private searchInfusionHistoryUrl = 'http://74.207.227.41:4000/api/nurse/infusionhistory'
+	// Test server URLS
+
+  	// private getStationsUrl = 'http://74.207.227.41:4000/api/nurse/station'
+	// private setStationUrl = 'http://74.207.227.41:4000/api/nurse/setstation'
+	// private getBedsUrl = 'http://74.207.227.41:4000/api/nurse/bed'
+	// private getDoctorsUrl = 'http://74.207.227.41:4000/api/nurse/doctor'
+	// private managePatientUrl = 'http://74.207.227.41:4000/api/nurse/patient'
+	// private getOccupiedBedsUrl = 'http://74.207.227.41:4000/api/nurse/occupiedbed'
+	// private manageTaskUrl = 'http://74.207.227.41:4000/api/nurse/task'
+	// private getUpcomingTaskUrl = 'http://74.207.227.41:4000/api/nurse/upcomingtask'
+	// private getDelayedTaskUrl = 'http://74.207.227.41:4000/api/nurse/delayedtask'
+	// private getActiveTaskUrl = 'http://74.207.227.41:4000/api/nurse/activetask'
+	// private getPhistoryUrl = 'http://74.207.227.41:4000/api/nurse/patienthistory'
+	// private getDriposUrl = 'http://74.207.227.41:4000/api/nurse/dripo'
+	// private blockAcknowledgeUrl = 'http://74.207.227.41:4000/api/nurse/blockack'
+	// private getInfusionDetailsUrl =  'http://74.207.227.41:4000/api/nurse/infusiondetails'
+	// private searchInfusionHistoryUrl = 'http://74.207.227.41:4000/api/nurse/infusionhistory'
+
+	//Production Server Urls
+
+	private getStationsUrl = 'https://api.dripo.care/api/nurse/station'
+	private setStationUrl = 'https://api.dripo.care/api/nurse/setstation'
+	private getBedsUrl = 'https://api.dripo.care/api/nurse/bed'
+	private getDoctorsUrl = 'https://api.dripo.care/api/nurse/doctor'
+	private managePatientUrl = 'https://api.dripo.care/api/nurse/patient'
+	private getOccupiedBedsUrl = 'https://api.dripo.care/api/nurse/occupiedbed'
+	private manageTaskUrl = 'https://api.dripo.care/api/nurse/task'
+	private getUpcomingTaskUrl = 'https://api.dripo.care/api/nurse/upcomingtask'
+	private getDelayedTaskUrl = 'https://api.dripo.care/api/nurse/delayedtask'
+	private getActiveTaskUrl = 'https://api.dripo.care/api/nurse/activetask'
+	private getPhistoryUrl = 'https://api.dripo.care/api/nurse/patienthistory'
+	private getDriposUrl = 'https://api.dripo.care/api/nurse/dripo'
+	private blockAcknowledgeUrl = 'https://api.dripo.care/api/nurse/blockack'
+	private getInfusionDetailsUrl =  'https://api.dripo.care/api/nurse/infusiondetails'
+	private searchInfusionHistoryUrl = 'https://api.dripo.care/api/nurse/infusionhistory'
+
 
 
 
@@ -35,10 +56,10 @@ export class NurseService {
 	// private getUpcomingTaskUrl = 'http://localhost:4000/api/nurse/upcomingtask'
 	// private getDelayedTaskUrl = 'http://localhost:4000/api/nurse/delayedtask'
 	// private getActiveTaskUrl = 'http://localhost:4000/api/nurse/activetask'
-	//private getPhistoryUrl = 'http://localhost:4000/api/nurse/patienthistory'
+	// private getPhistoryUrl = 'http://localhost:4000/api/nurse/patienthistory'
 	// private getDriposUrl = 'http://localhost:4000/api/nurse/dripo'
 	// private blockAcknowledgeUrl = 'http://localhost:4000/api/nurse/blockack'
-	//private getInfusionDetailsUrl =  'http://localhost:4000/api/nurse/infusiondetails'
+	// private getInfusionDetailsUrl =  'http://localhost:4000/api/nurse/infusiondetails'
 	// private searchInfusionHistoryUrl = 'http://localhost:4000/api/nurse/infusionhistory'
 
 	constructor(private http:HttpClient,private router:Router) { }

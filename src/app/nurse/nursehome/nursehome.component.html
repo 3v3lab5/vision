@@ -11,9 +11,12 @@
                      [colspan]="1"
                      [rowspan]="1">
                          <mat-card fxLayout="column" [ngClass]="[(dripo.monitor==true)?'online':'offline' ,(dripo.status=='alerted')?'alerted_card':'ongoing_card']" flexLayoutAlign="center center" style="height: 100%;width: 100%;box-shadow: none;padding: 0px;border: 1px solid rgb(230,230,230)">
-                             <div fxFlex="20" *ngIf="dripo.monitor==true" style="text-align: center;padding-top:0.5em;font-size: 1.5em;" [ngClass]="(dripo.status=='alerted')?'alerted':'ongoing'">
+                             <div fxFlex="20" *ngIf="dripo.monitor==true && dripo.status !='disconnected'" style="text-align: center;padding-top:0.5em;font-size: 1.5em;" [ngClass]="(dripo.status=='alerted')?'alerted':'ongoing'">
                                  <b>{{dripo.bedName}}</b>
                              </div>
+                             <div fxFlex="20" *ngIf="dripo.monitor==true && dripo.status =='disconnected'" style="text-align: center;padding-top:0.5em;font-size: 1.5em;" class="disconnected">
+                                <b>{{dripo.bedName}}</b>
+                            </div>
                              <div fxFlex="20" *ngIf="dripo.monitor==false" style="text-align: center;padding:1em;font-size: 1.5em;color:#757575;">
                                  <b>{{dripo.altName}}</b>
                              </div>
@@ -33,11 +36,14 @@
                                      </div>
                                  </div>
                                  <div fxFlex="90"  fxLayout="column" flexLayoutAlign="center center">
-                                    <div fxFlex="30" *ngIf="dripo.monitor==true && dripo.rate!=0"  style="text-align: center;font-size: 3em;font-weight: 500;color:#757575;">
+                                    <div fxFlex="30" *ngIf="dripo.monitor==true && dripo.rate!=0 && dripo.status !='disconnected'"  style="text-align: center;font-size: 3em;font-weight: 500;color:#757575;">
                                         {{dripo.rate}} 
                                     </div>
-                                    <div fxFlex="30" *ngIf="dripo.monitor==true && dripo.rate==0"  style="text-align: center;font-size: 2em;font-weight: 500;padding-top:0.6em;color:#757575;">
+                                    <div fxFlex="30" *ngIf="dripo.monitor==true && dripo.rate==0 && dripo.status !='disconnected'"  style="text-align: center;font-size: 2em;font-weight: 500;padding-top:0.6em;color:#757575;">
                                         No Flow
+                                    </div>
+                                    <div fxFlex="30" *ngIf="dripo.monitor==true && dripo.status =='disconnected'"  style="text-align: center;font-size: 1.5em;font-weight: 500;padding-top:0.6em;color:#757575;">
+                                        Connection Error
                                     </div>
                                     <div fxFlex="30" *ngIf="dripo.monitor==false"  style="text-align: center;font-size: 3em;font-weight: 500;color:#757575;">
                                         _ _ _
@@ -57,14 +63,17 @@
                                             </mat-progress-bar>
                                         </div>
                                     </div>
-                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)>9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}} <b style="font-size:12px;">Hr</b> {{dripo.timeRemaining%60}} <b style="font-size:12px;">Min</b>
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)>9 && dripo.status =='ongoing'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}} <b style="font-size:12px;">Hr</b> {{dripo.timeRemaining%60}} <b style="font-size:12px;">Min</b>
                                     </div>
-                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)<=9 && dripo.status !='alerted'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}} <b style="font-size:12px;">Hr</b> 0{{dripo.timeRemaining%60}} <b style="font-size:12px;">Min</b>
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)>0 && (dripo.timeRemaining%60)<=9 && dripo.status =='ongoing'"  style="text-align: center;color:#757575;font-size: 1.5em;padding-top: 0.3em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">{{dripo.timeRemaining /60 | round}} <b style="font-size:12px;">Hr</b> 0{{dripo.timeRemaining%60}} <b style="font-size:12px;">Min</b>
                                     </div>
-                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)<=0 && dripo.status !='alerted'"  style="padding-top: 0.3em;text-align: center;color:#757575;font-size: 1.5em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">00:00
+                                    <div fxFlex="25" *ngIf="dripo.monitor==true && (dripo.timeRemaining)<=0 && dripo.status =='ongoing'"  style="padding-top: 0.3em;text-align: center;color:#757575;font-size: 1.5em;" [ngClass]="(dripo.percentage >95)?'blinking':'normal'">00:00
                                     </div>
                                     <div fxFlex=25 *ngIf="dripo.monitor == true && dripo.status=='alerted'" style="text-align: center;">
                                         <button style="width: 90%;font-size: 1em;font-weight: 400;" mat-stroked-button color="warn" (click)=acknowledge(dripo._id)>Acknowledge</button>
+                                    </div>
+                                    <div fxFlex=25 *ngIf="dripo.monitor == true && dripo.status=='disconnected'" style="text-align: center;">
+                                        <button style="width: 90%;font-size: 1em;font-weight: 400;" mat-stroked-button [color]="'disconnected'" (click)=acknowledgeConErr(dripo._id)>Acknowledge</button>
                                     </div>
                                     <div fxFlex="25" *ngIf="dripo.monitor==false"  style="text-align: center;color:#757575;font-size: 1.5em;">_ _ _
                                     </div>

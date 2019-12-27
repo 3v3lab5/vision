@@ -9,8 +9,11 @@ import * as io from 'socket.io-client';
 export class SocketService {
   private socket:any;
   constructor() {
-    this.socket = io('http://74.207.227.41:4000');
-    // this.socket = io('http://localhost:4000');
+    // this.socket = io('http://74.207.227.41:4000');
+
+    this.socket = io('https://api.dripo.care');
+
+    //this.socket = io('http://localhost:4000');
     //this.socket = io('https://localhost:4000',{secure:true , rejectUnauthorized: false });
 
   }

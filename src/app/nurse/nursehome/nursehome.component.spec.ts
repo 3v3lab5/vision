@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconModule, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatSnackBarModule, MatGridListModule, MatProgressBarModule, MatExpansionModule } from '@angular/material';
+import { MatIconModule, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatSnackBarModule, MatGridListModule, MatProgressBarModule, MatExpansionModule, MatProgressSpinnerModule } from '@angular/material';
 import { RoundPipe } from 'src/app/pipes/round.pipe';
 
 describe('NursehomeComponent', () => {
@@ -29,6 +29,7 @@ describe('NursehomeComponent', () => {
         MatFormFieldModule,
         FlexLayoutModule,
         HttpClientModule,
+        MatProgressSpinnerModule,
         BrowserAnimationsModule
       ],
       declarations: [ NursehomeComponent,RoundPipe ]

@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
       this.userData = this.registerForm.value;
-      console.log(this.userData);
+      //console.log(this.userData);
       this.auth.registerUser(this.userData)
       	.subscribe(
       		res => {

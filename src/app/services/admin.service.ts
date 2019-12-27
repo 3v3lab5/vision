@@ -7,17 +7,29 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AdminService {
-  private manageUserUrl = 'http://74.207.227.41:4000/api/admin/user'
-  private manageStationUrl = 'http://74.207.227.41:4000/api/admin/station'
-  private manageBedUrl = 'http://74.207.227.41:4000/api/admin/bed'
-  private manageIvsetUrl = 'http://74.207.227.41:4000/api/admin/ivset'
-  private manageDripoUrl = 'http://74.207.227.41:4000/api/admin/dripo'
 
-    // private manageUserUrl = 'http://localhost:4000/api/admin/user'
-    // private manageStationUrl = 'http://localhost:4000/api/admin/station'
-    // private manageBedUrl = 'http://localhost:4000/api/admin/bed'
-    // private manageIvsetUrl = 'http://localhost:4000/api/admin/ivset'
-    // private manageDripoUrl = 'http://localhost:4000/api/admin/dripo'
+  //Test Server Url
+
+  // private manageUserUrl = 'http://74.207.227.41:4000/api/admin/user'
+  // private manageStationUrl = 'http://74.207.227.41:4000/api/admin/station'
+  // private manageBedUrl = 'http://74.207.227.41:4000/api/admin/bed'
+  // private manageIvsetUrl = 'http://74.207.227.41:4000/api/admin/ivset'
+  // private manageDripoUrl = 'http://74.207.227.41:4000/api/admin/dripo'
+
+  //Production Server Urls
+
+  private manageUserUrl = 'https://api.dripo.care/api/admin/user'
+  private manageStationUrl = 'https://api.dripo.care/api/admin/station'
+  private manageBedUrl = 'https://api.dripo.care/api/admin/bed'
+  private manageIvsetUrl = 'https://api.dripo.care/api/admin/ivset'
+  private manageDripoUrl = 'https://api.dripo.care/api/admin/dripo'
+
+
+  // private manageUserUrl = 'http://localhost:4000/api/admin/user'
+  // private manageStationUrl = 'http://localhost:4000/api/admin/station'
+  // private manageBedUrl = 'http://localhost:4000/api/admin/bed'
+  // private manageIvsetUrl = 'http://localhost:4000/api/admin/ivset'
+  // private manageDripoUrl = 'http://localhost:4000/api/admin/dripo'
 
 
   	constructor(private http:HttpClient,private router:Router) { }

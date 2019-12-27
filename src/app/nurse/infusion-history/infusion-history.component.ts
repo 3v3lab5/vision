@@ -14,6 +14,8 @@ export class InfusionHistoryComponent implements OnInit {
 
   details={'infusionLogs':[],'error':[],'batteryLogs':[],'bedName':'','date':'','startingTime':'','endingTime':''
 ,'infusedVolume':'','totalVolume':'','averageRate':''};
+  innerWidth=0;
+  innerHeight=0;
   rate:Array<any>=[];
   time=[];
   infusedVolume=[];
@@ -41,6 +43,9 @@ export class InfusionHistoryComponent implements OnInit {
 
     
   ngOnInit() {
+    this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
+
     let id = this.route.snapshot.paramMap.get('id');
     var resultArray:Array<any>=[];
     var resultArray2:Array<any>=[];
@@ -98,7 +103,10 @@ export class InfusionHistoryComponent implements OnInit {
         title: {
           text: 'Rate (ml/hr)',
         }
-      }}
+      },
+      width: this.innerWidth,
+      height: this.innerHeight
+    }
     }
     this.graph2 = {
       data: [
@@ -113,7 +121,10 @@ export class InfusionHistoryComponent implements OnInit {
         title: {
           text: 'Infused volume (ml)',
         }
-      }}
+      },
+      width: this.innerWidth,
+      height: this.innerHeight
+    }
     }
     this.graph3 = {
       data: [
@@ -128,7 +139,10 @@ export class InfusionHistoryComponent implements OnInit {
         title: {
           text: '% mAh',
         }
-      }}
+      },
+      width: this.innerWidth,
+      height: this.innerHeight
+    }
     }
   }
 

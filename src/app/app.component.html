@@ -2,9 +2,9 @@
     <button mat-icon-button *ngIf="authService.loggedIn() && adminPermission()" aria-label="Toggle sidenav" (click)="drawer.toggle()"><mat-icon style="color: #568B3E;">menu</mat-icon></button>
 	<span style="color: #d02539;font-size: 25px;padding-left: 16px;">Evelabs</span>
 	<span class="example-fill-remaining-space"></span>
-	<span *ngIf="nursePermission()" mat-button [fxShow.gt-sm]="true"  fxHide [fxHide.xs]="true" style="color:#757575;font-size: 16px;font-weight: 100;">{{authService.getHospitalName()}}</span>  
-    <span *ngIf="nursePermission() && authService.stationSelected()" [fxShow.gt-sm]="true" fxHide [fxHide.xs]="true" style="color:#757575;font-size: 16px;font-weight: 100;padding-left: 1em;padding-right: 1em;"> > </span>
-    <span *ngIf="nursePermission()" style="color:#757575;font-size: 16px;font-weight: 100;" class="station_name" mat-button>{{authService.getStationName()}}</span>
+	<button *ngIf="nursePermission()" mat-button [fxShow.gt-sm]="true"  fxHide [fxHide.xs]="true" style="color:#757575;font-size: 16px;font-weight: 100;" routerLink="/nurse/selectstation">{{authService.getHospitalName()}}</button>  
+    <span *ngIf="nursePermission() && authService.stationSelected()" [fxShow.gt-sm]="true" fxHide [fxHide.xs]="true"  style="color:#757575;font-size: 16px;font-weight: 100;padding-left: 1em;padding-right: 1em;"> > </span>
+    <button *ngIf="nursePermission()" style="color:#757575;font-size: 16px;font-weight: 100;" class="station_name" routerLink="/nurse/home" mat-button>{{authService.getStationName()}}</button>
     <span class="toolbar-spacer"></span>
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="/guest/login" routerLinkActive="toolbar-active">Login</button>
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="/guest/register" routerLinkActive="toolbar-active">Register</button>

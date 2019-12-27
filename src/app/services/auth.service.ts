@@ -16,12 +16,24 @@ export class AuthService {
   public permission;
   private decodedToken;
 
-  private registerUrl = "http://74.207.227.41:4000/api/register";
-	private loginUrl = "http://74.207.227.41:4000/api/login";
-  private activateAccountUrl  = "http://74.207.227.41:4000/api/activate";
-  private forgotPasswordUrl = "http://74.207.227.41:4000/api/forgotpassword";
-  private resetPasswordUrl = "http://74.207.227.41:4000/api/resetpassword";
-  private resendActivationLinkUrl="http://74.207.227.41:4000/api/resend"
+  // private registerUrl = "http://74.207.227.41:4000/api/register";
+	// private loginUrl = "http://74.207.227.41:4000/api/login";
+  // private activateAccountUrl  = "http://74.207.227.41:4000/api/activate";
+  // private forgotPasswordUrl = "http://74.207.227.41:4000/api/forgotpassword";
+  // private resetPasswordUrl = "http://74.207.227.41:4000/api/resetpassword";
+  // private resendActivationLinkUrl="http://74.207.227.41:4000/api/resend"
+
+
+  //production server urls
+
+  private registerUrl = "https://api.dripo.care/api/register";
+	private loginUrl = "https://api.dripo.care/api/login";
+  private activateAccountUrl  = "https://api.dripo.care/api/activate";
+  private forgotPasswordUrl = "https://api.dripo.care/api/forgotpassword";
+  private resetPasswordUrl = "https://api.dripo.care/api/resetpassword";
+  private resendActivationLinkUrl="https://api.dripo.care/api/resend"
+
+  //Test Server urls
 
   // private registerUrl = "http://localhost:4000/api/register";
   // private resendActivationLinkUrl="http://localhost:4000/api/resend"
@@ -73,6 +85,7 @@ export class AuthService {
 
     }
     catch(e){
+      console.log("invalid token");
       this.logoutUser();
     }
     if(this.decodedToken){

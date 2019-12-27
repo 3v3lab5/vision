@@ -29,6 +29,13 @@
   .ongoing{
       color:#689f38;
   }
+
+  .disconnected{
+      color:#FFD600;
+  }
+  .mat-disconnected {
+    color:#FFD600;
+  }
   
   @keyframes blinker {
     from { opacity: 1.0; }

@@ -1,12 +1,17 @@
+import { AuthService } from './../../services/auth.service';
 import { NurseService } from './../../services/nurse.service';
 import { SocketService } from './../../services/socket.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { Subscription, interval } from 'rxjs';
+import {Howl, Howler} from 'howler';
+
 @Component({
   selector: 'app-nursehome',
   templateUrl: './nursehome.component.html',
   styleUrls: ['./nursehome.component.css']
 })
+
 
 export class NursehomeComponent implements OnInit {
   showFiller = false;
@@ -31,11 +36,16 @@ export class NursehomeComponent implements OnInit {
   blockAckData={_id:''};
   loader=false; 
   infusionHistoryCallFlag=true; 
+  subscription: Subscription;
+  intervalId: number;
+
+ 
 
   constructor(
               private nurse: NurseService,
               public snackbar: MatSnackBar,
-              private socketService:SocketService) { }
+              private socketService:SocketService,
+              private auth:AuthService) { }
               
 
   onResize(event) {
@@ -65,6 +75,26 @@ export class NursehomeComponent implements OnInit {
       this.rowHeight=320;
 
     }
+
+  }
+ 
+  disconnectionChecker(){
+    var date = new Date();
+    var minutes = date.getMinutes();
+    // console.log(minutes);
+    this.dripos.forEach(function (dripo,index) {
+      if(dripo.monitor==true && dripo.status !='disconnected'){
+        //var lastMin = parseInt(dripo.lastMessageMin);
+        // console.log(dripo.lastMessageMin);
+        // console.log(Math.abs((dripo.lastMessageMin -minutes)));
+        if(Math.abs((dripo.lastMessageMin -minutes)) > 4 && Math.abs((dripo.lastMessageMin -minutes)) < 56){
+          dripo.status='disconnected';
+          dripo.monitor=true;
+        }
+      }
+      
+
+    });
 
   }
 
@@ -97,6 +127,20 @@ export class NursehomeComponent implements OnInit {
     }
     // this.cols = (window.innerWidth <= 425) ? 1 : 4;
     // this.cols = (window.innerWidth <= 770 && window.innerWidth >425) ? 2 : 4;
+    // var soundBlock = new Howl({
+    //   src: ['./../../../assets/audios/drughi.wav'],
+    //   autoplay: true,
+
+    // });
+
+    // var sound = new Howl({
+    //   src: ['./../../../assets/audios/drugmed.wav'],
+    //   autoplay: true,
+
+    // });
+    
+    const source = interval(60000);
+    this.subscription = source.subscribe(val => this.disconnectionChecker());
 
     
     this.date= new Date();
@@ -112,6 +156,9 @@ export class NursehomeComponent implements OnInit {
               }
               else{
                    this.snackbar.open(res.message, 'close')
+                   if(res.message == "Invalid Token"){
+                      this.auth.logoutUser();
+                   }
                    if(this.infusionHistoryCallFlag==false){
                     this.loader=true;
                     }
@@ -154,6 +201,7 @@ if(this.infusionHistoryCallFlag==true){
                 dripo.infusionStatus='Started';
                 dripo.infusedVolume=msg.infusedVolume;
                 dripo.timeRemaining=msg.timeRemaining;
+                dripo.lastMessageMin = msg.lastMessageMin;
                 dripo.percentage=msg.percentage;
                 dripo.deviceCharge = msg.deviceCharge;
                 dripo.topic = msg.topic;
@@ -171,6 +219,7 @@ if(this.infusionHistoryCallFlag==true){
                 dripo.infusionStatus='Infusing';
                 dripo.infusedVolume=msg.infusedVolume;
                 dripo.timeRemaining=msg.timeRemaining;
+                dripo.lastMessageMin = msg.lastMessageMin;
                 dripo.percentage=msg.percentage;
                 dripo.deviceCharge = msg.deviceCharge;
                 dripo.topic = msg.topic;
@@ -188,19 +237,30 @@ if(this.infusionHistoryCallFlag==true){
                  dripo.infusionStatus='Blocked';
                  dripo.infusedVolume=msg.infusedVolume;
                  dripo.timeRemaining=msg.timeRemaining;
+                 dripo.lastMessageMin = msg.lastMessageMin;
                  dripo.percentage=msg.percentage;
                  dripo.deviceCharge = msg.deviceCharge;
                  dripo.topic = msg.topic;
                }
            });
+          // soundBlock.play();
            
+        }
+        else if(msg.infusionStatus == 'Disconnected'){
+          this.dripos.forEach(function (dripo,index) {
+            if(msg._id == dripo._id){
+              dripo.monitor=true;
+              dripo.status='disconnected';
+            }
+          });
+          //sound.play();
         }
 
         else if(msg.infusionStatus == 'Ended'){
           this.dripos.forEach(function (dripo,index) {
               if(msg._id == dripo._id){
                 dripo.monitor=false;
-                dripo.status='" "';
+                dripo.status='';
               }
           });
             this.nurse.readPatientHistory()
@@ -249,6 +309,16 @@ this.nurse.blockAck(this.blockAckData)
 )
 }
 
+acknowledgeConErr(id:any){
+  this.dripos.forEach(function (dripo,index) {
+    if(dripo._id == id){
+      dripo.status='offline';
+      dripo.monitor=false;
+    }
+});
+}
+
+
 searchInfusionHistory(){
   //const newDate = this.date.toISOString().substr(0,10);
   this.nurse.searchInfusionHistory(this.date)
@@ -267,6 +337,12 @@ searchInfusionHistory(){
         }
     )
 }
-  
+
+ngOnDestroy() {
+  // For method 1
+  this.subscription && this.subscription.unsubscribe();
+}
+
+
 
 }
