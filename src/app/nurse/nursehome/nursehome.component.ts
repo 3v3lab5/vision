@@ -127,11 +127,11 @@ export class NursehomeComponent implements OnInit {
     }
     // this.cols = (window.innerWidth <= 425) ? 1 : 4;
     // this.cols = (window.innerWidth <= 770 && window.innerWidth >425) ? 2 : 4;
-    // var soundBlock = new Howl({
-    //   src: ['./../../../assets/audios/drughi.wav'],
-    //   autoplay: true,
+    var soundBlock = new Howl({
+      src: ['./../../../assets/audios/drughi.wav'],
+      autoplay: true,
 
-    // });
+    });
 
     // var sound = new Howl({
     //   src: ['./../../../assets/audios/drugmed.wav'],
@@ -243,7 +243,7 @@ if(this.infusionHistoryCallFlag==true){
                  dripo.topic = msg.topic;
                }
            });
-          // soundBlock.play();
+          soundBlock.play();
            
         }
         else if(msg.infusionStatus == 'Disconnected'){
